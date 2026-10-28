@@ -1,0 +1,35 @@
+// ──────────────────────────────────────────────────────────────
+// ይህን በ Firebase Console → Firestore Database → Rules ውስጥ ያለዎት
+//   match /databases/{database}/documents { ... }
+// ብሎክ ውስጥ (ከነባር የ "books" ደንብዎ አጠገብ) ጨምሩ። ነባሩን አይተኩ።
+// ከዚያ "Publish" ይጫኑ።
+// ──────────────────────────────────────────────────────────────
+
+    function isAdmin() {
+      return request.auth != null
+        && request.auth.token.email == "yiduguranse@gmail.com";
+    }
+
+    // የክፍያ መዝገብ (ጽሑፍ ብቻ — ቀላል)
+    match /payments/{id} {
+      allow create: if request.auth != null
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.status == "pending"
+        && request.resource.data.amount in [20, 49, 99]
+        && request.resource.data.name is string && request.resource.data.name.size() < 100
+        && request.resource.data.contact is string && request.resource.data.contact.size() < 150;
+      allow read: if isAdmin()
+        || (request.auth != null && resource.data.uid == request.auth.uid);
+      allow update, delete: if isAdmin();
+    }
+
+    // የደረሰኝ ፎቶ (ለብቻው ተቀምጧል — ዝርዝሩ ቀላል እንዲሆን)
+    match /paymentImages/{id} {
+      allow create: if request.auth != null
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.img is string
+        && request.resource.data.img.size() < 900000;
+      allow read: if isAdmin()
+        || (request.auth != null && resource.data.uid == request.auth.uid);
+      allow delete: if isAdmin();
+    }

@@ -1,0 +1,18 @@
+# ይህን ወደ .env ገልብጠው ይሙሉ (ወይም በአስተናጋጁ Environment Variables ውስጥ ያስገቡ)
+PORT=3000
+CODE_SECRET=ቢያንስ-16-ፊደል-ረጅም-የዘፈቀደ-ጽሑፍ-እዚህ-ያስገቡ
+# ድር ጣቢያዎ ያለበት ዶሜይን (ብዙ ከሆኑ በኮማ ይለዩ)፤ ለሙከራ * ይሰራል
+ALLOWED_ORIGIN=https://your-domain.com
+
+# SMTP — ለምሳሌ የራስዎ ዶሜይን ኢሜይል፣ Gmail (App Password)፣ Brevo፣ ወዘተ
+SMTP_HOST=smtp.your-domain.com
+SMTP_PORT=587
+SMTP_USER=no-reply@your-domain.com
+SMTP_PASS=የኢሜይል-የይለፍ-ቃል
+MAIL_FROM="Nibab Hub <no-reply@your-domain.com>"
+
+# የክፍያ ደረሰኞች የሚላኩበት ኢሜይል (አማራጭ — ካልተሞላ nibabhubet@gmail.com)
+PAY_TO=nibabhubet@gmail.com
+
+# ለሙከራ ብቻ፦ 1 ከሆነ ኢሜይል አይልክም፤ ኮዱን በሰርቨሩ ኮንሶል ያሳያል
+# MAIL_DEBUG=1
